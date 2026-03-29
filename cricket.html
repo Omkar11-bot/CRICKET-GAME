@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        text-align:center;
+        background-color: rgb(163, 8, 8);
+    
+    }
+    button{
+    text-transform: uppercase;
+    height: 100px;
+    width: 150px;
+    margin: 5px;
+    border: 3px solid rgb(4, 4, 4);
+    border-radius: 3px;
+    }
+
+    .button_cricket{
+       height: 200px;
+       width: 200px;
+     border-radius: 50px; 
+     background-color :rgb(0, 242, 85);
+     border: none;
+     margin:10px;
+     cursor: pointer;
+    }
+    .button_cricket img{
+        height: 175px;
+        border-radius: 50px;
+       
+    
+    }
+
+    #reset{
+        border: none;
+        border-radius: 20px;
+        font-size: large;
+        font-weight: 900;
+    }
+</style>
+<body>
+    <h1>BAT BALL GAME</h1>
+    <button   class="button_cricket" onclick="
+    you='bat' ;
+   let computer=computernumber();
+  let  re=result('bat',computer);
+   showresult(you,computer,re);
+  "
+  
+    >
+<img src="img/bat.png" alt="bat">
+</button>
+
+
+    <button   class="button_cricket"
+    onclick="
+    you='ball'
+    computer=computernumber();
+  re=result(you,computer);
+ showresult(you,computer,re);  
+    "><img src="img/ball.png" alt="ball"></button>
+
+
+    <button  class="button_cricket"
+    onclick="
+    you='stump'
+    computer=computernumber();
+re=result('stump',computer);
+    showresult(you,computer,re);
+    "><img src="img/stump.png" alt="bat"></button>
+
+<br>
+
+    <button id="reset" onclick="localStorage.clear()
+resetScore();
+showresult();
+">Reset</button>
+
+<h2 id="you"></h2>
+<h2 id="computer"></h2>
+<h2 id="result"></h2>
+<h2 id="score"></h2>
+    <script>
+
+
+let you;
+let scoreresult=localStorage.getItem('score');
+let score
+resetScore(scoreresult);
+function resetScore(scoreresult){
+
+ score= scoreresult?JSON.parse(scoreresult):{
+    win:0,
+    loss:0,
+    tie:0,
+}
+ 
+score.display=function(){
+   return `win${score.win}\nloss${score.loss}\n tie${score.tie}`;
+};
+}
+// let storage=
+// let display=JSON.parse(localStorage.getItem('score'));
+
+function computernumber(){
+    let randomnuber=Math.random()*3;
+    if(randomnuber<=1){
+         return'bat'
+    }else if(randomnuber<=2){
+        return'ball'     
+    }
+    else{
+         return'stump' 
+    }
+}
+
+
+function result(my,your){
+    if(my==='bat'){
+       if(your==='bat'){
+       score.tie++;
+    return('result:tie')
+}else if(your==='ball'){
+    score.win++;
+    return('result:you win')
+}else{
+     score.loss++;
+     return('result:computer win')
+     
+}
+
+    }
+    else if(my==='ball'){
+        if(your==='bat'){
+            score.loss++;
+      return('result:computer win')
+}else if(your==='ball'){
+    score.tie++;
+    return('result:tie')
+}else{
+     score.win++;
+      return('result:you win')
+}
+
+    }
+    else{
+        if(your==='bat'){
+            score:win++;
+   return('result:you win')
+}else if(your==='ball'){
+    score.loss++;
+  return('result:computer win')
+}else{
+    score.tie++;
+     return('result:tie')
+}
+
+    }
+}
+function showresult(you,computer,re){
+    localStorage.setItem('score',JSON.stringify(score))
+
+    document.querySelector('#you').innerHTML=
+    you ?`you have choosen:${you}`:'';
+    document.querySelector('#computer').innerHTML=computer?`computer have choosen: ${computer}`:'';//ter operator
+    document.querySelector('#result').innerHTML=re? re:'';
+    document.querySelector('#score').innerHTML=score.display();
+
+}
+
+    </script>
+</body>
+
+</html>
