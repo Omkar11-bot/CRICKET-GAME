@@ -1,5 +1,9 @@
 🏏 Cricket Game
 
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Omkar11-bot&repo=Mantra-Clone" />
+</p>
+--
 📌 Overview
 
 This is a simple and fun **Cricket Game project** built using programming logic.
